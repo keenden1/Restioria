@@ -7,6 +7,7 @@
     style="@style/SCREEN"
     tools:context=".MainActivity">
 
+
     <TextView
         android:id="@+id/welcometext"
         android:layout_width="289dp"
