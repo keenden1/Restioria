@@ -3,6 +3,9 @@
     <style name="SCREEN">
         <item name="android:background">@drawable/frontpage</item>
     </style>
+    <style name="SCREEN2">
+        <item name="android:background">@drawable/backgroundnew</item>
+    </style>
     <style name="TEXT">
         <item name="android:textColor">#000</item>
     </style>
