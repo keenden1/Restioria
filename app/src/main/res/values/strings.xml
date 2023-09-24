@@ -12,6 +12,8 @@
     <string name="Click_to_Login">Click to Login</string>
     <string name="click_to_Register">click to Register</string>
     <string name="logout">LOGOUT</string>
+    <string name="title">Alert Dialog</string>
+    <string name="message">Do you want to exit?</string>
 
 </resources>
 
