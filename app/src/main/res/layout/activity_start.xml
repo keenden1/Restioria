@@ -11,7 +11,7 @@
         android:id="@+id/welcometext"
         android:layout_width="289dp"
         android:layout_height="82dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginStart="68dp"
         android:fontFamily="@font/my_cool_layout"
         android:gravity="center"
         android:shadowColor="#000000"
@@ -21,15 +21,16 @@
         android:text="@string/welcome"
         android:textColor="#FFEB3B"
         android:textSize="55sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="48dp" />
 
     <TextView
         android:id="@+id/to"
         android:layout_width="219dp"
         android:layout_height="83dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/my_cool_layout"
         android:gravity="center"
         android:shadowColor="#000000"
         android:shadowDx="11"
@@ -37,16 +38,16 @@
         android:shadowRadius="5"
         android:text="@string/to"
         android:textColor="#FFEB3B"
-        android:fontFamily="@font/my_cool_layout"
         android:textSize="55sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcometext" />
+
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="296dp"
         android:layout_height="83dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/my_cool_layout"
         android:gravity="center"
@@ -57,31 +58,16 @@
         android:text="@string/restoria"
         android:textColor="#FFEB3B"
         android:textSize="65sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/to" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="187dp"
-        android:layout_height="94dp"
-        android:layout_marginTop="131dp"
-        android:background="@drawable/border2"
-        android:gravity="center"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
 
     <TextView
         android:id="@+id/grid1"
         android:layout_width="120dp"
         android:layout_height="16dp"
-        android:layout_marginTop="224dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="192dp"
         android:background="#E8E4C9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,10 +75,9 @@
         android:id="@+id/grid2"
         android:layout_width="120dp"
         android:layout_height="16dp"
-        android:layout_marginTop="224dp"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="192dp"
         android:background="#E8E4C9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.938"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -100,25 +85,26 @@
         android:id="@+id/start"
         android:layout_width="177dp"
         android:layout_height="85dp"
-        android:layout_marginTop="135dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="192dp"
         android:background="@drawable/border"
+        android:fontFamily="@font/my_cool_layout"
         android:gravity="center"
         android:shadowColor="#000000"
         android:shadowDx="4"
         android:shadowDy="2"
         android:shadowRadius="2"
         android:text="@string/start"
-        android:fontFamily="@font/my_cool_layout"
         android:textSize="45sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView12"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="317dp"
         android:layout_height="43dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:shadowColor="#000000"
         android:shadowDx="11"
@@ -126,10 +112,35 @@
         android:shadowRadius="5"
         android:textColor="@color/white"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="146dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginBottom="64dp"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="4"
+        android:shadowDy="2"
+        android:shadowRadius="2"
+        android:text="LeaderBoard"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="147dp"
+        android:layout_height="84dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="116dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/start"
+        app:srcCompat="@drawable/leader" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
