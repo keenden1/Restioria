@@ -4,6 +4,229 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/SCREEN"
     tools:context=".Sign_up">
+
+    <TextView
+        android:id="@+id/back"
+        android:layout_width="305dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="24dp"
+        android:background="@color/semiTransparentGray"
+        android:gravity="center|left"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/back1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/emailaddress2"
+        android:layout_width="191dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:fontFamily="@font/my_cool_layout"
+        android:gravity="center"
+        android:hint="EMAIL ADDRESS"
+        android:inputType="textPersonName"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="4"
+        android:shadowRadius="2"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/back"
+        app:layout_constraintEnd_toEndOf="@+id/back"
+        app:layout_constraintStart_toStartOf="@+id/back" />
+
+    <TextView
+        android:id="@+id/image2"
+        android:layout_width="371dp"
+        android:layout_height="84dp"
+        android:fontFamily="@font/my_cool_layout"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="11"
+        android:shadowDy="4"
+        android:shadowRadius="5"
+        android:text="RESTORIA"
+        android:textColor="#FFEB3B"
+        android:textSize="55sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="94dp"
+        android:layout_height="103dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="168dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView13"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/add" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="76dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="212dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="132dp"
+        android:layout_marginEnd="68dp"
+        android:fontFamily="@font/my_cool_layout"
+        android:gravity="center|bottom"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="4"
+        android:shadowRadius="2"
+        android:text="SIGN-UP"
+        android:textColor="@color/white"
+        android:textSize="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/back1"
+        android:layout_width="305dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginBottom="12dp"
+        android:background="@color/semiTransparentGray"
+        android:gravity="center|left"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/back2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="191dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:fontFamily="@font/my_cool_layout"
+        android:gravity="center"
+        android:hint="USERNAME"
+        android:inputType="textPersonName"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="4"
+        android:shadowRadius="2"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/back1"
+        app:layout_constraintEnd_toEndOf="@+id/back1"
+        app:layout_constraintStart_toStartOf="@+id/back1" />
+
+
+    <TextView
+        android:id="@+id/back2"
+        android:layout_width="305dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginBottom="24dp"
+        android:background="@color/semiTransparentGray"
+        android:gravity="center|left"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/back3"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/password1"
+        android:layout_width="191dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:fontFamily="@font/my_cool_layout"
+        android:gravity="center"
+        android:hint="PASSWORD"
+        android:inputType="textPersonName"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="4"
+        android:shadowRadius="2"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/back2"
+        app:layout_constraintEnd_toEndOf="@+id/back2"
+        app:layout_constraintStart_toStartOf="@+id/back2" />
+
+    <TextView
+        android:id="@+id/back3"
+        android:layout_width="305dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="28dp"
+        android:background="@color/semiTransparentGray"
+        android:gravity="center|left"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13"
+        app:layout_constraintVertical_bias="0.707" />
+
+    <EditText
+        android:id="@+id/rppassword"
+        android:layout_width="191dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:fontFamily="@font/my_cool_layout"
+        android:gravity="center"
+        android:hint="REPEAT PASSWORD"
+        android:inputType="textPersonName"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="4"
+        android:shadowRadius="2"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/back3"
+        app:layout_constraintEnd_toEndOf="@+id/back3"
+        app:layout_constraintStart_toStartOf="@+id/back3" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="114dp"
+        android:layout_height="72dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/enter" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="110dp"
+        android:layout_height="72dp"
+        android:fontFamily="@font/my_cool_layout"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="4"
+        android:shadowRadius="2"
+        android:text="ENTER"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.006"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+
+
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
