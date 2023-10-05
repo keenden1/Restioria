@@ -3,30 +3,39 @@ package com.example.restoria_app;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Set;
+
 public class Start extends AppCompatActivity {
 
-    ImageView img;
+    ImageView setbutton;
     TextView btn1;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        decorView.setSystemUiVisibility(uiOptions);
-
         setContentView(R.layout.activity_start);
 
+        setFullscreen();
 
+
+
+
+        MediaPlayer mediaPlayer = media.getMediaPlayer(this);
+        mediaPlayer.start();
 
         btn1 = findViewById(R.id.start);
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -37,12 +46,11 @@ public class Start extends AppCompatActivity {
             }
         });
 
-
-        img = findViewById(R.id.imageView5);
-        img.setOnClickListener(new View.OnClickListener() {
+        setbutton = findViewById(R.id.imageView5);
+        setbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Start.this, Homepage.class);
+                Intent intent=new Intent(Start.this, Setting.class);
                 startActivity(intent);
             }
         });
@@ -58,10 +66,45 @@ public class Start extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        finish();
+                        finishAffinity();
                     }
                 })
                 .setNegativeButton("No", null)
                 .show();
     }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            setFullscreen();
+        }
+    }
+    private void setFullscreen() {
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Resume the mediaPlayer using your media class
+        media.resumeMediaPlayer();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        media.pauseMediaPlayer();
+
+    }
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+        // Stop music when the user leaves the app (e.g., presses the home button)
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+        }
+    }
+
 }
