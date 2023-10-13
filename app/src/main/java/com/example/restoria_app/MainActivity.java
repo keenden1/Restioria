@@ -3,6 +3,7 @@ package com.example.restoria_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView button1,button2;
     ImageView but1;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
         setFullscreen();
         
         setContentView(R.layout.activity_main);
-
+        MediaPlayer mediaPlayer = media.getMediaPlayer(this);
+        mediaPlayer.start();
         button1 = findViewById(R.id.start);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,5 +72,16 @@ public class MainActivity extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Resume the mediaPlayer using your media class
+        media.resumeMediaPlayer();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        media.pauseMediaPlayer();
 
+    }
 }

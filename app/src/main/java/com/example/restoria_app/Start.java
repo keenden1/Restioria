@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Set;
 
 public class Start extends AppCompatActivity {
@@ -22,6 +25,7 @@ public class Start extends AppCompatActivity {
     ImageView setbutton;
     TextView btn1;
     private MediaPlayer mediaPlayer;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,19 +34,24 @@ public class Start extends AppCompatActivity {
         setContentView(R.layout.activity_start);
 
         setFullscreen();
-
-
-
-
+        mAuth = FirebaseAuth.getInstance();
         MediaPlayer mediaPlayer = media.getMediaPlayer(this);
         mediaPlayer.start();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
 
         btn1 = findViewById(R.id.start);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Start.this, MainActivity.class);
-                startActivity(intent);
+                if (currentUser != null) {
+                    Intent intent = new Intent(Start.this, Homepage.class);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent = new Intent(Start.this, MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -89,7 +98,6 @@ public class Start extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Resume the mediaPlayer using your media class
         media.resumeMediaPlayer();
     }
     @Override
@@ -101,10 +109,10 @@ public class Start extends AppCompatActivity {
     @Override
     protected void onUserLeaveHint() {
         super.onUserLeaveHint();
-        // Stop music when the user leaves the app (e.g., presses the home button)
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
         }
     }
+
 
 }
