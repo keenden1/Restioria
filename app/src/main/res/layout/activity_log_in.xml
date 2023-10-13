@@ -118,7 +118,7 @@
         app:srcCompat="@drawable/enter" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/enter"
         android:layout_width="110dp"
         android:layout_height="72dp"
         android:fontFamily="@font/my_cool_layout"

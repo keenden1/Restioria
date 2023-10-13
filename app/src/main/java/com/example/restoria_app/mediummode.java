@@ -7,58 +7,41 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class mediummode extends AppCompatActivity {
 
-    TextView button1,button2;
-    ImageView but1;
+    private MediaPlayer mediaPlayer;
+    ImageView meduim_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setFullscreen();
-        
-        setContentView(R.layout.activity_main);
         MediaPlayer mediaPlayer = media.getMediaPlayer(this);
         mediaPlayer.start();
-        button1 = findViewById(R.id.start);
-        button1.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_mediummode);
+
+
+        meduim_back = findViewById(R.id.meduimback);
+        meduim_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this, Log_in.class);
-                startActivity(intent);
-            }
-        });
-        button2 = findViewById(R.id.textView4);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this, Sign_up.class);
+                Intent intent=new Intent(mediummode.this, Homepage.class);
                 startActivity(intent);
             }
         });
 
 
-        but1 = findViewById(R.id.imageView6);
-        but1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this, Setting.class);
-                startActivity(intent);
-            }
-        });
 
     }
+
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(MainActivity.this, Start.class);
+        Intent intent=new Intent(mediummode.this, Homepage.class);
         startActivity(intent);
     }
-
-
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -71,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-        // Resume the mediaPlayer using your media class
         media.resumeMediaPlayer();
     }
     @Override
@@ -82,5 +65,12 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         media.pauseMediaPlayer();
 
+    }
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+        }
     }
 }

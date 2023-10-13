@@ -22,7 +22,7 @@ import java.util.Set;
 
 public class Start extends AppCompatActivity {
 
-    ImageView setbutton;
+    ImageView setbutton,leader_board;
     TextView btn1;
     private MediaPlayer mediaPlayer;
     private FirebaseAuth mAuth;
@@ -63,8 +63,14 @@ public class Start extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
+        leader_board = findViewById(R.id.imageView4);
+        leader_board.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Start.this, leaderboard.class);
+                startActivity(intent);
+            }
+        });
 
     }
     @Override

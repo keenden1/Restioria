@@ -9,19 +9,26 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Setting extends AppCompatActivity {
     private ImageView button_1;
     private MediaPlayer mediaPlayer;
     private SharedPreferences sharedPreferences;
     private AudioManager audioManager;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private ImageView unmute;
     private ImageView mute;
+    TextView logout;
     private boolean isMuted; // To keep track of the mute/unmute state
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setFullscreen();
         setContentView(R.layout.activity_setting);
 
@@ -29,10 +36,13 @@ public class Setting extends AppCompatActivity {
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
+
+
         unmute = findViewById(R.id.unmute);
         mute = findViewById(R.id.mute);
+        logout = findViewById(R.id.logout);
 
-        // Retrieve the mute/unmute state from SharedPreferences
+
         isMuted = sharedPreferences.getBoolean("isMuted", false);
         updateMuteUI();
 
@@ -51,6 +61,13 @@ public class Setting extends AppCompatActivity {
                 isMuted = true;
                 updateMuteUI();
                 saveMuteState();
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logoutUser();
             }
         });
 
@@ -87,7 +104,6 @@ public class Setting extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Resume the mediaPlayer using your media class
         media.resumeMediaPlayer();
     }
 
@@ -98,7 +114,6 @@ public class Setting extends AppCompatActivity {
     }
 
     private void saveMuteState() {
-        // Save the mute/unmute state in SharedPreferences
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("isMuted", isMuted);
         editor.apply();
@@ -114,5 +129,14 @@ public class Setting extends AppCompatActivity {
             unmute.setVisibility(View.GONE);
             mute.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void logoutUser() {
+        firebaseAuth.signOut();
+        Toast.makeText(this, "You have been logged out", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(Setting.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }
