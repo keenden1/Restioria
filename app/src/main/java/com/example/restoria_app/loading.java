@@ -2,50 +2,31 @@ package com.example.restoria_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
-import android.widget.ImageView;
 
-public class hardmode extends AppCompatActivity {
-
+public class loading extends AppCompatActivity {
     private MediaPlayer mediaPlayer;
-    ImageView hard_back;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_loading);
         setFullscreen();
-        MediaPlayer mediaPlayer = media.getMediaPlayer(this);
-        setContentView(R.layout.activity_hardmode);
-
-        hard_back = findViewById(R.id.hardback);
-        hard_back.setOnClickListener(new View.OnClickListener() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(hardmode.this, Homepage.class);
+            public void run() {
+                // After the task is done, navigate to the main activity
+                Intent intent = new Intent(loading.this, Start.class);
                 startActivity(intent);
+                finish();
             }
-        });
-
-
-
+        }, 1000); // Simulate 3 seconds of loading time
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent=new Intent(hardmode.this, Homepage.class);
-        startActivity(intent);
-    }
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            setFullscreen();
-        }
-    }
     private void setFullscreen() {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
@@ -70,4 +51,5 @@ public class hardmode extends AppCompatActivity {
             mediaPlayer.stop();
         }
     }
+
 }

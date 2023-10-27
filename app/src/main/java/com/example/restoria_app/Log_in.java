@@ -34,7 +34,6 @@ public class Log_in extends AppCompatActivity {
 
         setFullscreen();
         MediaPlayer mediaPlayer = media.getMediaPlayer(this);
-        mediaPlayer.start();
         setContentView(R.layout.activity_log_in);
 
 

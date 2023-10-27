@@ -8,4 +8,5 @@
     <color name="green">#00FF00</color>
     <color name="transparent">#AARRGGBB</color>
     <color name="semiTransparentGray">#80000000</color>
+    <color name="whitish">#B2FFFFFF</color>
 </resources>

@@ -7,56 +7,36 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
-
-    TextView button1,button2;
-    ImageView but1;
+public class about extends AppCompatActivity {
+    ImageView backtosetting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
         setFullscreen();
-        
-        setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_about);
         MediaPlayer mediaPlayer = media.getMediaPlayer(this);
-        button1 = findViewById(R.id.start);
-        button1.setOnClickListener(new View.OnClickListener() {
+
+
+
+
+
+
+
+
+
+        backtosetting = findViewById(R.id.imageback);
+        backtosetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this, Log_in.class);
+                Intent intent = new Intent(about.this, Setting.class);
                 startActivity(intent);
             }
         });
-        button2 = findViewById(R.id.textView4);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this, Sign_up.class);
-                startActivity(intent);
-            }
-        });
-
-
-        but1 = findViewById(R.id.imageView6);
-        but1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this, Setting.class);
-                startActivity(intent);
-            }
-        });
-
     }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent=new Intent(MainActivity.this, Start.class);
-        startActivity(intent);
-    }
-
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -69,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(about.this, Setting.class);
+        startActivity(intent);
     }
     @Override
     protected void onResume() {

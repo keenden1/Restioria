@@ -18,7 +18,6 @@ public class leaderboard extends AppCompatActivity {
 
         setFullscreen();
         MediaPlayer mediaPlayer = media.getMediaPlayer(this);
-        mediaPlayer.start();
         setContentView(R.layout.activity_leaderboard);
 
         leaderboard_back = findViewById(R.id.back_to_start);

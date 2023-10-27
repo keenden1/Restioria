@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,7 +44,6 @@ public class Sign_up extends AppCompatActivity {
 
         setContentView(R.layout.activity_sign_up);
         MediaPlayer mediaPlayer = media.getMediaPlayer(this);
-        mediaPlayer.start();
 
         textemail = findViewById(R.id.emailaddress2);
         textusername = findViewById(R.id.username);
@@ -64,56 +64,45 @@ public class Sign_up extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
                 final String emailtxt = String.valueOf(textemail.getText());
                 final String passwordtxt = String.valueOf(textpassword.getText());
                 final String usernametxt = String.valueOf(textusername.getText());
                 final String passwordrpttxt = String.valueOf(textpasswordrpt.getText());
 
-
-
                 if (TextUtils.isEmpty(emailtxt) || TextUtils.isEmpty(passwordtxt) || TextUtils.isEmpty(usernametxt) || TextUtils.isEmpty(passwordrpttxt)) {
                     Toast.makeText(Sign_up.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 if (!passwordtxt.equals(passwordrpttxt)) {
                     Toast.makeText(Sign_up.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-
-                databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.hasChild(usernametxt)) {
-                            Toast.makeText(Sign_up.this, "Username Already Used", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            if (containsNumber(usernametxt)) {
-                                Toast.makeText(Sign_up.this, "Username cannot contain numbers", Toast.LENGTH_SHORT).show();
-                            } else {
-                                databaseReference.child("users").setValue(usernametxt);
-                            }
-                        }
-                    }
-
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
 
                 firebaseAuth.createUserWithEmailAndPassword(emailtxt, passwordtxt)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(Sign_up.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                                    firebaseAuth.signOut();
-                                    Intent intent = new Intent(Sign_up.this, Log_in.class);
-                                    startActivity(intent);
-                                    finish();
+                                    FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+                                    if (currentUser != null) {
+                                        String userId = currentUser.getUid();
+
+
+                                        DatabaseReference userReference = databaseReference.child("users").child(userId);
+
+
+                                        userReference.child("Username").setValue(usernametxt);
+                                        userReference.child("Email").setValue(emailtxt);
+
+                                        Toast.makeText(Sign_up.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                        firebaseAuth.signOut();
+                                        Intent intent = new Intent(Sign_up.this, Log_in.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(Sign_up.this, "Failed to get the current user", Toast.LENGTH_SHORT).show();
+                                    }
                                 } else {
                                     Toast.makeText(Sign_up.this, "Authentication Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }

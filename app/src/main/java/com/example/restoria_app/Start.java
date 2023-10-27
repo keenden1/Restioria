@@ -1,5 +1,6 @@
 package com.example.restoria_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,18 +15,25 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Set;
 
 public class Start extends AppCompatActivity {
 
     ImageView setbutton,leader_board;
-    TextView btn1;
+    TextView btn1,textView5;
     private MediaPlayer mediaPlayer;
     private FirebaseAuth mAuth;
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://restoria-e00ae-default-rtdb.asia-southeast1.firebasedatabase.app/");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +44,39 @@ public class Start extends AppCompatActivity {
         setFullscreen();
         mAuth = FirebaseAuth.getInstance();
         MediaPlayer mediaPlayer = media.getMediaPlayer(this);
-        mediaPlayer.start();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
-
+        textView5 = findViewById(R.id.textView5);
         btn1 = findViewById(R.id.start);
+
+        if (currentUser != null) {
+            String userEmail = currentUser.getEmail();
+            if (userEmail != null) {
+                databaseReference.child("users").orderByChild("Email").equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                String username = userSnapshot.child("Username").getValue(String.class);
+                                textView5.setText(username);
+                            }
+                        } else {
+                            textView5.setText("");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+            }
+        } else {
+
+        }
+
+
+
+
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

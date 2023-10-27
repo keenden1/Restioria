@@ -22,7 +22,7 @@ public class Setting extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private ImageView unmute;
     private ImageView mute;
-    TextView logout;
+    private ImageView logout,about;
     private boolean isMuted; // To keep track of the mute/unmute state
 
     @Override
@@ -40,7 +40,7 @@ public class Setting extends AppCompatActivity {
 
         unmute = findViewById(R.id.unmute);
         mute = findViewById(R.id.mute);
-        logout = findViewById(R.id.logout);
+        logout = findViewById(R.id.log_out);
 
 
         isMuted = sharedPreferences.getBoolean("isMuted", false);
@@ -76,6 +76,15 @@ public class Setting extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Setting.this, Start.class);
+                startActivity(intent);
+            }
+        });
+
+        about = findViewById(R.id.about);
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Setting.this, about.class);
                 startActivity(intent);
             }
         });

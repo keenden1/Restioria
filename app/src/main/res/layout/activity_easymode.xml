@@ -1,56 +1,55 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root_view"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    style="@style/SCREEN2" >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/SCREEN"
+    tools:context=".easymode">
 
-    <LinearLayout
-        android:id="@+id/ll_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:layout_gravity="center_horizontal|center_vertical">
-
-        <ImageView
-            android:id="@+id/imageView_home"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="top|left"
-            android:layout_marginRight="40dp"
-            android:contentDescription="Back"
-            android:src="@drawable/back" />
-
-        <ImageView
-        android:id="@+id/fix_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
-        android:gravity="left"
-        android:paddingTop="20dp"
-        android:layout_marginBottom="40dp"
-        android:contentDescription="@string/puzzlelayout"
-        android:src="@drawable/a_layout" />
-        <ImageView
-            android:id="@+id/img_showWord"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="80dp"
-            android:layout_marginBottom="20dp"
-            android:contentDescription="@string/puzzledone"
-            android:src="@drawable/a"
-            android:visibility="gone"/>
-
-
-
-
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/back_to_easy"
+        android:layout_width="76dp"
+        android:layout_height="53dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.125"
+        app:srcCompat="@drawable/back" />
 
     <TextView
-        android:layout_width="83dp"
-        android:layout_height="41dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="1:00" />
-</RelativeLayout>
+        android:id="@+id/play"
+        android:layout_width="163dp"
+        android:layout_height="96dp"
+        android:background="@drawable/border"
+        android:fontFamily="@font/text"
+        android:gravity="center"
+        android:text="VIDEO"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" />
+
+    <TextView
+        android:id="@+id/next_quiz_easy"
+        android:layout_width="163dp"
+        android:layout_height="96dp"
+        android:background="@drawable/border"
+        android:fontFamily="@font/text"
+        android:gravity="center"
+        android:text="QUIZ"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.748"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" />
+</androidx.constraintlayout.widget.ConstraintLayout>

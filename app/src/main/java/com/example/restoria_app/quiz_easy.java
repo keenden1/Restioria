@@ -2,66 +2,33 @@ package com.example.restoria_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.view.View;
 import android.content.Intent;
+import android.os.Bundle;
 import android.media.MediaPlayer;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+public class quiz_easy extends AppCompatActivity {
 
-public class easymode extends AppCompatActivity {
-
-    TextView play ,gotoquiz;
-    ImageView backtoeasy;
-
-
+    ImageView back_one;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_quiz_easy);
         setFullscreen();
-        setContentView(R.layout.activity_easymode);
         MediaPlayer mediaPlayer = media.getMediaPlayer(this);
 
 
-        backtoeasy = findViewById(R.id.back_to_easy);
+        back_one = findViewById(R.id.backto_easymode);
 
-        backtoeasy.setOnClickListener(new View.OnClickListener() {
+        back_one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(easymode.this, Homepage.class);
+                Intent intent=new Intent(quiz_easy.this, easymode.class);
                 startActivity(intent);
             }
         });
-
-        play = findViewById(R.id.play);
-
-        play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(easymode.this, video_1.class);
-                startActivity(intent);
-            }
-        });
-
-
-        gotoquiz = findViewById(R.id.next_quiz_easy);
-        gotoquiz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(easymode.this, quiz_easy.class);
-                startActivity(intent);
-            }
-        });
-
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        Intent intent=new Intent(easymode.this, Homepage.class);
-        startActivity(intent);
     }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -76,6 +43,11 @@ public class easymode extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
     }
     @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(quiz_easy.this, easymode.class);
+        startActivity(intent);
+    }
+    @Override
     protected void onResume() {
         super.onResume();
         // Resume the mediaPlayer using your media class
@@ -87,5 +59,4 @@ public class easymode extends AppCompatActivity {
         media.pauseMediaPlayer();
 
     }
-
 }

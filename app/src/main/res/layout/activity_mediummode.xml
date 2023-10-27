@@ -19,21 +19,22 @@
         app:layout_constraintVertical_bias="0.125"
         app:srcCompat="@drawable/back" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="237dp"
-        android:layout_height="164dp"
-        android:fontFamily="@font/my_cool_layout"
-        android:gravity="center"
-        android:shadowColor="#000000"
-        android:shadowDx="1"
-        android:shadowDy="4"
-        android:shadowRadius="2"
-        android:text="Di pa tapos medium mode!"
-        android:textColor="@color/white"
-        android:textSize="35dp"
+    <FrameLayout
+        android:layout_width="515dp"
+        android:layout_height="279dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.791"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.643">
+
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="496dp"
+            android:layout_height="210dp" />
+
+    </FrameLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,9 +15,33 @@
         android:theme="@style/Theme.RESTORIA_APP"
         tools:targetApi="31">
         <activity
-            android:name=".leaderboard"
+            android:name=".quiz_easy"
             android:exported="false"
             android:screenOrientation="sensorLandscape"/>
+        <activity
+            android:name=".about"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".video_1"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".puzzle"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".Start"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".score"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".leaderboard"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".mediummode"
             android:exported="false"
@@ -47,7 +71,7 @@
             android:exported="false"
             android:screenOrientation="sensorLandscape" />
         <activity
-            android:name=".Start"
+            android:name=".loading"
             android:exported="true"
             android:screenOrientation="sensorLandscape">
             <intent-filter>

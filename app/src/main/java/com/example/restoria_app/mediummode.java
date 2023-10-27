@@ -7,11 +7,19 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.VideoView;
+import android.net.Uri;
+
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class mediummode extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
     ImageView meduim_back;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
+   // VideoView videoView = findViewById(R.id.videoView);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +27,7 @@ public class mediummode extends AppCompatActivity {
 
         setFullscreen();
         MediaPlayer mediaPlayer = media.getMediaPlayer(this);
-        mediaPlayer.start();
         setContentView(R.layout.activity_mediummode);
-
 
         meduim_back = findViewById(R.id.meduimback);
         meduim_back.setOnClickListener(new View.OnClickListener() {

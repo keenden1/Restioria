@@ -22,7 +22,7 @@ public class Homepage extends AppCompatActivity {
 
         setContentView(R.layout.activity_homepage);
         MediaPlayer mediaPlayer = media.getMediaPlayer(this);
-        mediaPlayer.start();
+
 
         buttonnew = findViewById(R.id.backtostart);
         buttonnew.setOnClickListener(new View.OnClickListener() {
@@ -63,11 +63,6 @@ public class Homepage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
-
-
 
     }
     @Override
