@@ -15,9 +15,25 @@
         android:theme="@style/Theme.RESTORIA_APP"
         tools:targetApi="31">
         <activity
-            android:name=".quiz_easy"
+            android:name=".quiz_easy5"
             android:exported="false"
             android:screenOrientation="sensorLandscape"/>
+        <activity
+            android:name=".quiz_easy4"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape"/>
+        <activity
+            android:name=".quiz_easy3"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape"/>
+        <activity
+            android:name=".quiz_easy2"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape"/>
+        <activity
+            android:name=".quiz_easy"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".about"
             android:exported="false"

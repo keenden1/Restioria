@@ -1,5 +1,7 @@
 package com.example.restoria_app;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,25 +26,24 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class quiz_easy extends AppCompatActivity {
-
+public class quiz_easy2 extends AppCompatActivity {
     private TextView countdownTextView;
     private CountDownTimer countDownTimer;
     private boolean isTimerPaused = false;
     private long timeRemaining;
-    ImageView back_one;
-    TextView button_easy_1,button_easy_2,button_easy_3,questioneasy;
+    TextView button_easy_1a,button_easy_2a,button_easy_3a,questioneasy;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://restoria-e00ae-default-rtdb.asia-southeast1.firebasedatabase.app");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz_easy);
+        setContentView(R.layout.activity_quiz_easy2);
+
         setFullscreen();
         MediaPlayer mediaPlayer = media.getMediaPlayer(this);
 
 
-        countdownTextView = findViewById(R.id.timer);
+        countdownTextView = findViewById(R.id.timerA);
 
         if (savedInstanceState != null) {
             isTimerPaused = savedInstanceState.getBoolean("isTimerPaused");
@@ -56,34 +57,15 @@ public class quiz_easy extends AppCompatActivity {
             startCountdown(30);
         }
 
-        back_one = findViewById(R.id.backto_easymode);
 
-        back_one.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new AlertDialog.Builder(quiz_easy.this)
-                        .setMessage("Are you sure you want to GIVE UP? \uD83D\uDE22")
-                        .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(quiz_easy.this, easymode.class);
-                                startActivity(intent);
-                            }
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
-            }
-        });
-
-        button_easy_1= findViewById(R.id.button_easy_1);
-        button_easy_2= findViewById(R.id.button_easy_2);
-        button_easy_3= findViewById(R.id.button_easy_3);
-        questioneasy = findViewById(R.id.textView19);
+        button_easy_1a= findViewById(R.id.button_easy_1a);
+        button_easy_2a= findViewById(R.id.button_easy_2a);
+        button_easy_3a= findViewById(R.id.button_easy_3a);
+        questioneasy = findViewById(R.id.question_2a);
 
         int totalQuestions = 5;
         int randomQuestionNumber = (int) (Math.random() * totalQuestions) + 1;
-        String randomQuestionPath = "questions/question" + randomQuestionNumber;
+        String randomQuestionPath = "questions2/question" + randomQuestionNumber;
 
         databaseReference.child(randomQuestionPath).child("QA").addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
@@ -100,7 +82,7 @@ public class quiz_easy extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String txt_1 = dataSnapshot.getValue(String.class);
-                button_easy_1.setText(txt_1);
+                button_easy_1a.setText(txt_1);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -111,7 +93,7 @@ public class quiz_easy extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String txt_2 = dataSnapshot.getValue(String.class);
-                button_easy_2.setText(txt_2);
+                button_easy_2a.setText(txt_2);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -122,7 +104,7 @@ public class quiz_easy extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String txt_3 = dataSnapshot.getValue(String.class);
-                button_easy_3.setText(txt_3);
+                button_easy_3a.setText(txt_3);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -132,7 +114,7 @@ public class quiz_easy extends AppCompatActivity {
 
 
 
-        button_easy_1.setOnClickListener(new View.OnClickListener() {
+        button_easy_1a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Check the condition in Firebase Realtime Database
@@ -146,36 +128,38 @@ public class quiz_easy extends AppCompatActivity {
                         String expectedAnswer = dataSnapshot.child("answer").getValue(String.class);
 
                         if (questionA != null && expectedAnswer != null && questionA.equals(expectedAnswer)) {
-                            button_easy_1.setBackgroundResource(R.drawable.border3);
-                            button_easy_2.setEnabled(false);
-                            button_easy_3.setEnabled(false);
+                            button_easy_1a.setBackgroundResource(R.drawable.border3);
+                            button_easy_2a.setEnabled(false);
+                            button_easy_3a.setEnabled(false);
                             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                             if (currentUser != null) {
                                 String userId = currentUser.getUid();
                                 DatabaseReference userRef = databaseRef.child("users").child(userId);
-                                userRef.child("score").child("EasyLevel_1").setValue(1);
+                                userRef.child("score").child("EasyLevel_2").setValue(1);
                             }
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Intent intent = new Intent(quiz_easy.this, quiz_easy2.class);
+                                    // Start the hardmode.xml activity here
+                                    Intent intent = new Intent(quiz_easy2.this, quiz_easy3.class);
                                     startActivity(intent);
                                 }
                             }, 3000);
                         }else{
-                            button_easy_1.setBackgroundResource(R.drawable.border4);
-                            button_easy_2.setEnabled(false);
-                            button_easy_3.setEnabled(false);
+                            button_easy_1a.setBackgroundResource(R.drawable.border4);
+                            button_easy_2a.setEnabled(false);
+                            button_easy_3a.setEnabled(false);
                             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                             if (currentUser != null) {
                                 String userId = currentUser.getUid();
                                 DatabaseReference userRef = databaseRef.child("users").child(userId);
-                                userRef.child("score").child("EasyLevel_1").setValue(0);
+                                userRef.child("score").child("EasyLevel_2").setValue(0);
                             }
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Intent intent = new Intent(quiz_easy.this, quiz_easy2.class);
+                                    // Start the hardmode.xml activity here
+                                    Intent intent = new Intent(quiz_easy2.this, quiz_easy3.class);
                                     startActivity(intent);
                                 }
                             }, 3000);
@@ -191,7 +175,7 @@ public class quiz_easy extends AppCompatActivity {
         });
 
 
-        button_easy_2.setOnClickListener(new View.OnClickListener() {
+        button_easy_2a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Check the condition in Firebase Realtime Database
@@ -205,36 +189,39 @@ public class quiz_easy extends AppCompatActivity {
                         String expectedAnswer = dataSnapshot.child("answer").getValue(String.class);
 
                         if (questionA != null && expectedAnswer != null && questionA.equals(expectedAnswer)) {
-                            button_easy_2.setBackgroundResource(R.drawable.border3);
-                            button_easy_1.setEnabled(false);
-                            button_easy_3.setEnabled(false);
+                            button_easy_2a.setBackgroundResource(R.drawable.border3);
+                            button_easy_1a.setEnabled(false);
+                            button_easy_3a.setEnabled(false);
                             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                             if (currentUser != null) {
                                 String userId = currentUser.getUid();
                                 DatabaseReference userRef = databaseRef.child("users").child(userId);
-                                userRef.child("score").child("EasyLevel_1").setValue(1);
+                                userRef.child("score").child("EasyLevel_2").setValue(1);
                             }
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Intent intent = new Intent(quiz_easy.this, quiz_easy2.class);
+                                    // Start the hardmode.xml activity here
+                                    Intent intent = new Intent(quiz_easy2.this, quiz_easy3.class);
                                     startActivity(intent);
                                 }
                             }, 3000);
+
                         }else{
-                            button_easy_2.setBackgroundResource(R.drawable.border4);
-                            button_easy_1.setEnabled(false);
-                            button_easy_3.setEnabled(false);
+                            button_easy_2a.setBackgroundResource(R.drawable.border4);
+                            button_easy_1a.setEnabled(false);
+                            button_easy_3a.setEnabled(false);
                             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                             if (currentUser != null) {
                                 String userId = currentUser.getUid();
                                 DatabaseReference userRef = databaseRef.child("users").child(userId);
-                                userRef.child("score").child("EasyLevel_1").setValue(0);
+                                userRef.child("score").child("EasyLevel_2").setValue(0);
                             }
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Intent intent = new Intent(quiz_easy.this, quiz_easy2.class);
+                                    // Start the hardmode.xml activity here
+                                    Intent intent = new Intent(quiz_easy2.this, quiz_easy3.class);
                                     startActivity(intent);
                                 }
                             }, 3000);
@@ -249,7 +236,7 @@ public class quiz_easy extends AppCompatActivity {
             }
         });
 
-        button_easy_3.setOnClickListener(new View.OnClickListener() {
+        button_easy_3a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Check the condition in Firebase Realtime Database
@@ -263,38 +250,38 @@ public class quiz_easy extends AppCompatActivity {
                         String expectedAnswer = dataSnapshot.child("answer").getValue(String.class);
 
                         if (questionA != null && expectedAnswer != null && questionA.equals(expectedAnswer)) {
-                            button_easy_3.setBackgroundResource(R.drawable.border3);
-                            button_easy_1.setEnabled(false);
-                            button_easy_2.setEnabled(false);
+                            button_easy_3a.setBackgroundResource(R.drawable.border3);
+                            button_easy_1a.setEnabled(false);
+                            button_easy_2a.setEnabled(false);
                             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                             if (currentUser != null) {
                                 String userId = currentUser.getUid();
                                 DatabaseReference userRef = databaseRef.child("users").child(userId);
-                                userRef.child("score").child("EasyLevel_1").setValue(1);
+                                userRef.child("score").child("EasyLevel_2").setValue(1);
                             }
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
                                     // Start the hardmode.xml activity here
-                                    Intent intent = new Intent(quiz_easy.this, quiz_easy2.class);
+                                    Intent intent = new Intent(quiz_easy2.this, quiz_easy3.class);
                                     startActivity(intent);
                                 }
                             }, 3000);
                         }else{
-                            button_easy_3.setBackgroundResource(R.drawable.border4);
-                            button_easy_1.setEnabled(false);
-                            button_easy_2.setEnabled(false);
+                            button_easy_3a.setBackgroundResource(R.drawable.border4);
+                            button_easy_1a.setEnabled(false);
+                            button_easy_2a.setEnabled(false);
                             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                             if (currentUser != null) {
                                 String userId = currentUser.getUid();
                                 DatabaseReference userRef = databaseRef.child("users").child(userId);
-                                userRef.child("score").child("EasyLevel_1").setValue(0);
+                                userRef.child("score").child("EasyLevel_2").setValue(0);
                             }
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
                                     // Start the hardmode.xml activity here
-                                    Intent intent = new Intent(quiz_easy.this, quiz_easy2.class);
+                                    Intent intent = new Intent(quiz_easy2.this, quiz_easy3.class);
                                     startActivity(intent);
                                 }
                             }, 3000);
@@ -311,18 +298,9 @@ public class quiz_easy extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     }
+
+
 
     private void startCountdown(int seconds) {
         countDownTimer = new CountDownTimer(seconds * 1000, 1000) {
@@ -334,12 +312,12 @@ public class quiz_easy extends AppCompatActivity {
 
             public void onFinish() {
                 countdownTextView.setText("0");
-                 next();
+                next();
             }
         }.start();
     }
     private void next() {
-        Intent intent = new Intent(quiz_easy.this, quiz_easy2.class);
+        Intent intent = new Intent(quiz_easy2.this, quiz_easy3.class);
         startActivity(intent);
     }
 
@@ -368,7 +346,7 @@ public class quiz_easy extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(quiz_easy.this, easymode.class);
+                        Intent intent = new Intent(quiz_easy2.this, easymode.class);
                         startActivity(intent);
                     }
                 })
