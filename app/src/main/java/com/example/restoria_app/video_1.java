@@ -1,11 +1,15 @@
 package com.example.restoria_app;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -51,6 +55,20 @@ public class video_1 extends AppCompatActivity {
                 // Handle any errors that occurred while getting the video URL.
             }
         });
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                // Video playback has ended
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(video_1.this, easymode.class);
+                        startActivity(intent);
+                        finish(); // Optional: Finish the current activity so the user can't go back to the video
+                    }
+                }, 3000); // 3000 milliseconds (3 seconds) delay
+            }
+        });
 
 
 
@@ -58,8 +76,18 @@ public class video_1 extends AppCompatActivity {
         back_vid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(video_1.this, easymode.class);
-                startActivity(intent);
+                new AlertDialog.Builder(video_1.this)
+                        .setMessage("Are you done WATCHING? \uD83D\uDE0A\uD83D\uDE0A")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(video_1.this, easymode.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
             }
         });
     }

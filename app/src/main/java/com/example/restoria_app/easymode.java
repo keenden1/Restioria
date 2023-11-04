@@ -1,7 +1,9 @@
 package com.example.restoria_app;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.content.Intent;
@@ -50,8 +52,18 @@ public class easymode extends AppCompatActivity {
         gotoquiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(easymode.this, quiz_easy.class);
-                startActivity(intent);
+                    new AlertDialog.Builder(easymode.this)
+                        .setMessage("Are you done WATCHING? \uD83D\uDE0A\uD83D\uDE0A")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(easymode.this, quiz_easy.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
             }
         });
 

@@ -1,21 +1,14 @@
 package com.example.restoria_app;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -57,7 +50,7 @@ public class Start extends AppCompatActivity {
                         if (dataSnapshot.exists()) {
                             for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                                 String username = userSnapshot.child("Username").getValue(String.class);
-                                textView5.setText(username);
+                                textView5.setText(username+" \uD83D\uDE0A\uD83D\uDE0A\uD83D\uDE0A");
                             }
                         } else {
                             textView5.setText("");

@@ -35,7 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="4dp"
-        android:text="30"
         android:textSize="30sp"
         app:layout_constraintEnd_toStartOf="@+id/imageView10"
         app:layout_constraintTop_toTopOf="parent" />
@@ -60,37 +59,40 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView11"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <TextView
         android:id="@+id/button_easy_1"
         android:layout_width="271dp"
         android:layout_height="38dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/border2"
-        android:text="A"
+        android:textColor="@color/white"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
-    <Button
+    <TextView
         android:id="@+id/button_easy_2"
         android:layout_width="271dp"
         android:layout_height="38dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/border2"
-        android:text="B"
+        android:textColor="@color/white"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_easy_1" />
 
-    <Button
+    <TextView
         android:id="@+id/button_easy_3"
         android:layout_width="271dp"
         android:layout_height="38dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/border2"
-        android:text="C"
+        android:textColor="@color/white"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +105,7 @@
         android:layout_marginTop="72dp"
         android:background="@color/whitish"
         android:gravity="center"
-        android:text="QUESTION"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.536"
         app:layout_constraintStart_toStartOf="parent"
