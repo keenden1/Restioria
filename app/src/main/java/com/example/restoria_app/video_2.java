@@ -10,6 +10,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,13 +24,15 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class video_2 extends AppCompatActivity {
-    private StorageReference videoRef;
-    Button back_vid;
+    private StorageReference videoReff;
+    private Button back_vid2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video2);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_video2);
+
+
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -39,8 +42,8 @@ public class video_2 extends AppCompatActivity {
         videoView.setMediaController(mediaController);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        videoRef = storage.getReferenceFromUrl("gs://restoria-e00ae.appspot.com/Sample/Lapu.mp4");
-        videoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        videoReff = storage.getReferenceFromUrl("gs://restoria-e00ae.appspot.com/Sample/Lapu.mp4");
+        videoReff.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 videoView.setVideoURI(uri);
@@ -52,6 +55,7 @@ public class video_2 extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
+                Log.e("Video_2", "Failed to get video URL", exception);
                 // Handle any errors that occurred while getting the video URL.
             }
         });
@@ -70,8 +74,8 @@ public class video_2 extends AppCompatActivity {
             }
         });
 
-        back_vid = findViewById(R.id.backButton);
-        back_vid.setOnClickListener(new View.OnClickListener() {
+        back_vid2 = findViewById(R.id.backButton);
+        back_vid2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new AlertDialog.Builder(video_2.this)

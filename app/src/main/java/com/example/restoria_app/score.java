@@ -19,7 +19,10 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.text.SimpleDateFormat; // Add this import
+import java.util.Date;
 
 public class score extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -89,21 +92,65 @@ public class score extends AppCompatActivity {
 
     private void saveTotalScoreToAllScores() {
         if (currentUser != null) {
-            // Create a unique ID for the new score entry
-            String newScoreId = databaseReference.push().getKey();
+            // Reference to the 'allscores' node
+            DatabaseReference allScoresRef = databaseReference.child("allscores");
 
-            // Get the total score from the TextView
-            String totalScoreString = totalScoreTextView.getText().toString();
-            long totalScore = Long.parseLong(totalScoreString.replace("Total Score: ", ""));
+            // Query to get all scores
+            allScoresRef.orderByChild("score").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    long maxScore = 0;
 
-            // Create a map to store the score and timestamp
-            Map<String, Object> scoreData = new HashMap<>();
-            scoreData.put("score", totalScore);
-            scoreData.put("timestamp", ServerValue.TIMESTAMP); // You can use ServerValue to get the server's timestamp
+                    // Loop through all scores and find the maximum
+                    for (DataSnapshot scoreSnapshot : dataSnapshot.getChildren()) {
+                        long scoreValue = scoreSnapshot.child("score").getValue(Long.class);
+                        if (scoreValue > maxScore) {
+                            maxScore = scoreValue;
+                        }
+                    }
 
-            // Save the total score to users>currentUser>allscores with the unique ID
-            databaseReference.child("allscores").child(newScoreId).setValue(scoreData);
+                    // Now, 'maxScore' contains the highest score among all scores
+
+                    // Create a unique ID for the new score entry
+                    String newScoreId = allScoresRef.push().getKey();
+
+                    // Get the total score from the TextView
+                    String totalScoreString = totalScoreTextView.getText().toString();
+                    long totalScore = Long.parseLong(totalScoreString.replace("Total Score: ", ""));
+
+                    // Create a map to store the score, timestamp, and date
+                    Map<String, Object> scoreData = new HashMap<>();
+                    scoreData.put("score", totalScore);
+
+                    // Use the current date as the timestamp
+                    scoreData.put("timestamp", System.currentTimeMillis());
+
+                    // Add the date as a string (optional)
+                    scoreData.put("date", getCurrentDate());
+
+                    // Save the total score to users>currentUser>allscores with the unique ID
+                    allScoresRef.child(newScoreId).setValue(scoreData);
+
+                    // You can also update the highest score in the user's main 'score' node
+                    updateHighestScore(totalScore);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle any errors
+                }
+            });
         }
+
+    }
+
+    private String getCurrentDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy", Locale.getDefault());
+        return dateFormat.format(new Date());
+    }
+    private void updateHighestScore(long totalScore) {
+        // Update the highest score in the user's main 'score' node
+        databaseReference.child("allscores").child("highestScore").setValue(totalScore);
     }
     @Override
     public void onBackPressed() {

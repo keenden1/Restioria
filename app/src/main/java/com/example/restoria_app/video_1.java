@@ -30,6 +30,7 @@ public class video_1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_video1);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         VideoView videoView = findViewById(R.id.videoView);
@@ -66,7 +67,7 @@ public class video_1 extends AppCompatActivity {
                         startActivity(intent);
                         finish(); // Optional: Finish the current activity so the user can't go back to the video
                     }
-                }, 2000); // 3000 milliseconds (3 seconds) delay
+                }, 3000); // 3000 milliseconds (3 seconds) delay
             }
         });
 

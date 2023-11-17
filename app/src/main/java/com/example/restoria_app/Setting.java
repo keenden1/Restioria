@@ -32,7 +32,10 @@ public class Setting extends AppCompatActivity {
         setFullscreen();
         setContentView(R.layout.activity_setting);
 
-        mediaPlayer = media.getMediaPlayer(this);
+        media.getMediaPlayer(this);
+
+
+
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 

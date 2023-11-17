@@ -22,14 +22,15 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 public class video_3 extends AppCompatActivity {
-    private StorageReference videoRef;
-    Button back_vid;
+    private StorageReference videoRef3;
+    private Button back_vid3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_video3);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         VideoView videoView = findViewById(R.id.videoView);
@@ -38,9 +39,9 @@ public class video_3 extends AppCompatActivity {
         videoView.setMediaController(mediaController);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        videoRef = storage.getReferenceFromUrl("gs://restoria-e00ae.appspot.com/Sample/Jeep.mp4");
+        videoRef3 = storage.getReferenceFromUrl("gs://restoria-e00ae.appspot.com/Sample/Jeep.mp4");
 
-        videoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        videoRef3.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 videoView.setVideoURI(uri);
@@ -66,14 +67,14 @@ public class video_3 extends AppCompatActivity {
                         startActivity(intent);
                         finish(); // Optional: Finish the current activity so the user can't go back to the video
                     }
-                }, 2000); // 3000 milliseconds (3 seconds) delay
+                }, 3000); // 3000 milliseconds (3 seconds) delay
             }
         });
 
 
 
-        back_vid = findViewById(R.id.backButton);
-        back_vid.setOnClickListener(new View.OnClickListener() {
+        back_vid3 = findViewById(R.id.backButton3);
+        back_vid3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new AlertDialog.Builder(video_3.this)
