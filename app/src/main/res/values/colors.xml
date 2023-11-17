@@ -9,4 +9,5 @@
     <color name="transparent">#AARRGGBB</color>
     <color name="semiTransparentGray">#80000000</color>
     <color name="whitish">#B2FFFFFF</color>
+    <color name="dirty">#B2E0E0E0</color>
 </resources>

@@ -1,17 +1,24 @@
 package com.example.restoria_app;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.media.MediaPlayer;
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 
 public class hardmode extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
-    ImageView hard_back;
+    private ImageView hard_back;
+    private ImageView play_hard ,gotoquizhard;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +36,40 @@ public class hardmode extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        play_hard = findViewById(R.id.play_hard);
+
+        play_hard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(hardmode.this, video_3.class);
+                startActivity(intent);
+            }
+        });
+
+
+        gotoquizhard = findViewById(R.id.next_hard_easy);
+        gotoquizhard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(hardmode.this)
+                        .setMessage("Are you done WATCHING? \uD83D\uDE0A\uD83D\uDE0A")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(hardmode.this, quiz_hard.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
+
+
+
+
 
 
 

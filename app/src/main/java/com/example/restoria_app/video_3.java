@@ -21,15 +21,15 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-public class video_1 extends AppCompatActivity {
+public class video_3 extends AppCompatActivity {
     private StorageReference videoRef;
     Button back_vid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_video3);
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_video1);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         VideoView videoView = findViewById(R.id.videoView);
@@ -38,7 +38,7 @@ public class video_1 extends AppCompatActivity {
         videoView.setMediaController(mediaController);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        videoRef = storage.getReferenceFromUrl("gs://restoria-e00ae.appspot.com/Sample/Flag.mp4");
+        videoRef = storage.getReferenceFromUrl("gs://restoria-e00ae.appspot.com/Sample/Jeep.mp4");
 
         videoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -62,7 +62,7 @@ public class video_1 extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        Intent intent = new Intent(video_1.this, easymode.class);
+                        Intent intent = new Intent(video_3.this, hardmode.class);
                         startActivity(intent);
                         finish(); // Optional: Finish the current activity so the user can't go back to the video
                     }
@@ -76,13 +76,13 @@ public class video_1 extends AppCompatActivity {
         back_vid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(video_1.this)
+                new AlertDialog.Builder(video_3.this)
                         .setMessage("Are you done WATCHING? \uD83D\uDE0A\uD83D\uDE0A")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(video_1.this, easymode.class);
+                                Intent intent = new Intent(video_3.this, hardmode.class);
                                 startActivity(intent);
                             }
                         })
@@ -90,6 +90,8 @@ public class video_1 extends AppCompatActivity {
                         .show();
             }
         });
+
+
     }
 
     private void setImmersiveMode() {

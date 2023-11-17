@@ -37,7 +37,7 @@ public class Homepage extends AppCompatActivity {
         goeasy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Homepage.this, easymode.class);
+                Intent intent=new Intent(Homepage.this, video_1.class);
                 startActivity(intent);
             }
         });
@@ -49,7 +49,7 @@ public class Homepage extends AppCompatActivity {
         gomedium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Homepage.this, mediummode.class);
+                Intent intent=new Intent(Homepage.this, video_2.class);
                 startActivity(intent);
             }
         });
@@ -59,7 +59,7 @@ public class Homepage extends AppCompatActivity {
         gohard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Homepage.this, hardmode.class);
+                Intent intent=new Intent(Homepage.this, video_3.class);
                 startActivity(intent);
             }
         });

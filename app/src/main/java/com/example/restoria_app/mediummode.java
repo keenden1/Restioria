@@ -1,14 +1,16 @@
 package com.example.restoria_app;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.media.MediaPlayer;
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.widget.ImageView;
-import android.widget.VideoView;
-import android.net.Uri;
+import android.widget.TextView;
 
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -16,10 +18,8 @@ import com.google.firebase.storage.StorageReference;
 public class mediummode extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
-    ImageView meduim_back;
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReference();
-   // VideoView videoView = findViewById(R.id.videoView);
+    private ImageView medium_back;
+    private ImageView play_medium ,gotoquizmedium;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +29,47 @@ public class mediummode extends AppCompatActivity {
         MediaPlayer mediaPlayer = media.getMediaPlayer(this);
         setContentView(R.layout.activity_mediummode);
 
-        meduim_back = findViewById(R.id.meduimback);
-        meduim_back.setOnClickListener(new View.OnClickListener() {
+        medium_back = findViewById(R.id.medium_back);
+        medium_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(mediummode.this, Homepage.class);
                 startActivity(intent);
             }
         });
+
+        play_medium = findViewById(R.id.play_medium);
+
+        play_medium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(mediummode.this, video_2.class);
+                startActivity(intent);
+            }
+        });
+
+
+        gotoquizmedium = findViewById(R.id.next_medium_easy);
+        gotoquizmedium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(mediummode.this)
+                        .setMessage("Are you done WATCHING? \uD83D\uDE0A\uD83D\uDE0A")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(mediummode.this, quiz_medium.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
+
+
+
 
 
 

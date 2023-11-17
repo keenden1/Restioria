@@ -20,21 +20,20 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
-
-public class score extends AppCompatActivity {
+public class score_hard extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
     private FirebaseUser currentUser;
-    private TextView totalScoreTextView,doneButton;
-
+    private TextView totalScoreTextView_hard,doneButton_hard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_score);
-
-        totalScoreTextView = findViewById(R.id.scores); // Replace with your TextView's ID
+        setContentView(R.layout.activity_score_hard);
         setFullscreen();
         MediaPlayer mediaPlayer = media.getMediaPlayer(this);
+
+        totalScoreTextView_hard = findViewById(R.id.scores_hard); // Replace with your TextView's ID
+        setFullscreen();
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -51,18 +50,18 @@ public class score extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        long easyLevel1Score = dataSnapshot.child("EasyLevel_1").getValue(Long.class);
-                        long easyLevel2Score = dataSnapshot.child("EasyLevel_2").getValue(Long.class);
-                        long easyLevel3Score = dataSnapshot.child("EasyLevel_3").getValue(Long.class);
-                        long easyLevel4Score = dataSnapshot.child("EasyLevel_4").getValue(Long.class);
-                        long easyLevel5Score = dataSnapshot.child("EasyLevel_5").getValue(Long.class);
+                        long hardLevel1Score = dataSnapshot.child("HardLevel_1").getValue(Long.class);
+                        long hardLevel2Score = dataSnapshot.child("HardLevel_2").getValue(Long.class);
+                        long hardLevel3Score = dataSnapshot.child("HardLevel_3").getValue(Long.class);
+                        long hardLevel4Score = dataSnapshot.child("HardLevel_4").getValue(Long.class);
+                        long hardLevel5Score = dataSnapshot.child("HardLevel_5").getValue(Long.class);
                         // Now, retrieve scores for EasyLevel_2 through EasyLevel_5 in a similar manner
 
                         // Calculate the total score
-                        long totalScore = easyLevel1Score + easyLevel2Score + easyLevel3Score + easyLevel4Score + easyLevel5Score;
+                        long totalScore = hardLevel1Score + hardLevel2Score + hardLevel3Score + hardLevel4Score + hardLevel5Score;
 
                         // Display the total score in the TextView
-                        totalScoreTextView.setText("Total Score: " + totalScore);
+                        totalScoreTextView_hard.setText("Total Score: " + totalScore);
                     }
                 }
 
@@ -76,38 +75,45 @@ public class score extends AppCompatActivity {
             databaseReference.addValueEventListener(scoreListener);
         }
 
-        doneButton = findViewById(R.id.done_button);
-        doneButton.setOnClickListener(new View.OnClickListener() {
+        doneButton_hard = findViewById(R.id.done_button_hard);
+        doneButton_hard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveTotalScoreToAllScores();
-                Intent intent = new Intent(score.this, Homepage.class);
+                Intent intent = new Intent(score_hard.this, Homepage.class);
                 startActivity(intent);
             }
         });
-    }
 
+
+
+
+
+
+
+
+    }
     private void saveTotalScoreToAllScores() {
         if (currentUser != null) {
             // Create a unique ID for the new score entry
             String newScoreId = databaseReference.push().getKey();
 
             // Get the total score from the TextView
-            String totalScoreString = totalScoreTextView.getText().toString();
+            String totalScoreString = totalScoreTextView_hard.getText().toString();
             long totalScore = Long.parseLong(totalScoreString.replace("Total Score: ", ""));
 
             // Create a map to store the score and timestamp
             Map<String, Object> scoreData = new HashMap<>();
-            scoreData.put("score", totalScore);
+            scoreData.put("score_hard", totalScore);
             scoreData.put("timestamp", ServerValue.TIMESTAMP); // You can use ServerValue to get the server's timestamp
 
             // Save the total score to users>currentUser>allscores with the unique ID
-            databaseReference.child("allscores").child(newScoreId).setValue(scoreData);
+            databaseReference.child("allscores_hard").child(newScoreId).setValue(scoreData);
         }
     }
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(score.this, hardmode.class);
+        Intent intent=new Intent(score_hard.this, hardmode.class);
         startActivity(intent);
     }
 

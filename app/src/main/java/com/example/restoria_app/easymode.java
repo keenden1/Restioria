@@ -3,6 +3,7 @@ package com.example.restoria_app;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -14,8 +15,8 @@ import android.widget.TextView;
 
 public class easymode extends AppCompatActivity {
 
-    TextView play ,gotoquiz;
-    ImageView backtoeasy;
+    private ImageView play ,gotoquiz;
+    private ImageView backtoeasy;
 
 
     @Override

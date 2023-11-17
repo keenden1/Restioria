@@ -4,26 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/SCREEN2"
+    style="@style/SCREEN_HARD"
     tools:context=".hardmode">
 
+
     <TextView
-        android:id="@+id/textView6"
-        android:layout_width="236dp"
-        android:layout_height="125dp"
-        android:fontFamily="@font/my_cool_layout"
-        android:gravity="center"
-        android:shadowColor="#000000"
-        android:shadowDx="1"
-        android:shadowDy="4"
-        android:shadowRadius="2"
-        android:text="Di pa tapos hardmode!"
-        android:textColor="@color/white"
-        android:textSize="35dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/textView22"
+        android:layout_width="505dp"
+        android:layout_height="256dp"
+        android:background="@color/dirty"
+        app:layout_constraintBottom_toBottomOf="@+id/play_hard"
+        app:layout_constraintEnd_toEndOf="@+id/next_hard_easy"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="@+id/play_hard"
+        app:layout_constraintTop_toTopOf="@+id/play_hard"
+        app:layout_constraintVertical_bias="0.243" />
 
     <ImageView
         android:id="@+id/hardback"
@@ -36,5 +31,78 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.125"
         app:srcCompat="@drawable/back" />
+
+    <ImageView
+        android:id="@+id/play_hard"
+        android:layout_width="163dp"
+        android:layout_height="96dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498"
+        app:srcCompat="@drawable/play_video"/>
+
+    <ImageView
+        android:id="@+id/next_hard_easy"
+        android:layout_width="163dp"
+        android:layout_height="96dp"
+        app:srcCompat="@drawable/play_now"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.765"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="95dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.924"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.108"
+        app:srcCompat="@drawable/qa" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="161dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/my_cool_layout"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="11"
+        android:shadowDy="4"
+        android:shadowRadius="5"
+        android:text="REPLAY"
+        android:textColor="#FFEB3B"
+        android:textSize="55sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/play_hard" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="161dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="132dp"
+        android:fontFamily="@font/my_cool_layout"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="11"
+        android:shadowDy="4"
+        android:shadowRadius="5"
+        android:text="PLAY"
+        android:textColor="#FFEB3B"
+        android:textSize="55sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/next_hard_easy" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
