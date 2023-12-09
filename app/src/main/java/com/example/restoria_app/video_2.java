@@ -55,7 +55,6 @@ public class video_2 extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Log.e("Video_2", "Failed to get video URL", exception);
                 // Handle any errors that occurred while getting the video URL.
             }
         });
@@ -74,7 +73,7 @@ public class video_2 extends AppCompatActivity {
             }
         });
 
-        back_vid2 = findViewById(R.id.backButton);
+        back_vid2 = findViewById(R.id.backButton2);
         back_vid2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

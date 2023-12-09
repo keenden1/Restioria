@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        but1 = findViewById(R.id.imageView6);
+        but1 = findViewById(R.id.next_to_setting);
         but1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

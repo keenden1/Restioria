@@ -52,18 +52,8 @@ public class hardmode extends AppCompatActivity {
         gotoquizhard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(hardmode.this)
-                        .setMessage("Are you done WATCHING? \uD83D\uDE0A\uD83D\uDE0A")
-                        .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(hardmode.this, quiz_hard.class);
-                                startActivity(intent);
-                            }
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
+                Intent intent=new Intent(hardmode.this, quiz_hard.class);
+                startActivity(intent);
             }
         });
 

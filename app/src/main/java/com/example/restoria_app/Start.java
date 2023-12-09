@@ -1,5 +1,6 @@
 package com.example.restoria_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
@@ -96,10 +97,70 @@ public class Start extends AppCompatActivity {
         leader_board.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Start.this, leaderboard.class);
-                startActivity(intent);
+                if (currentUser != null) {
+                    DatabaseReference userScoreRef = FirebaseDatabase.getInstance().getReference()
+                            .child("users")
+                            .child(currentUser.getUid())
+                            .child("score");
+
+                    // Retrieve the values of highestscore_easy, highestscore_medium, and highestscore_hard
+                    userScoreRef.child("highestscore_easy").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                long highestScoreEasy = dataSnapshot.getValue(Long.class);
+
+                                // Retrieve the value of highestscore_medium
+                                userScoreRef.child("highestscore_medium").addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            long highestScoreMedium = dataSnapshot.getValue(Long.class);
+
+                                            // Retrieve the value of highestscore_hard
+                                            userScoreRef.child("highestscore_hard").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                    if (dataSnapshot.exists()) {
+                                                        long highestScoreHard = dataSnapshot.getValue(Long.class);
+
+                                                        // Calculate the sum of the three scores
+                                                        long maxScore = highestScoreEasy + highestScoreMedium + highestScoreHard;
+
+                                                        // Save the sum as max_score
+                                                        userScoreRef.child("max_score").setValue(maxScore);
+
+                                                        // Start the leaderboard activity
+                                                        Intent intent = new Intent(Start.this, leaderboard.class);
+                                                        startActivity(intent);
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                                    // Handle any errors
+                                                }
+                                            });
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        // Handle any errors
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Handle any errors
+                        }
+                    });
+                }
             }
         });
+
 
     }
     @Override

@@ -53,18 +53,8 @@ public class easymode extends AppCompatActivity {
         gotoquiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    new AlertDialog.Builder(easymode.this)
-                        .setMessage("Are you done WATCHING? \uD83D\uDE0A\uD83D\uDE0A")
-                        .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(easymode.this, quiz_easy.class);
-                                startActivity(intent);
-                            }
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
+                Intent intent=new Intent(easymode.this, quiz_easy.class);
+                startActivity(intent);
             }
         });
 

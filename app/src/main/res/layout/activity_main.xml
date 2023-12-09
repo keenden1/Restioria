@@ -9,7 +9,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/next_to_setting"
         android:layout_width="67dp"
         android:layout_height="58dp"
         app:layout_constraintBottom_toBottomOf="parent"

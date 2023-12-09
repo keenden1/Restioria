@@ -64,7 +64,7 @@ public class quiz_medium extends AppCompatActivity {
 
         int totalQuestions = 5;
         int randomQuestionNumber = (int) (Math.random() * totalQuestions) + 1;
-        String randomQuestionPath = "medium//questions/question" + randomQuestionNumber;
+        String randomQuestionPath = "medium/questions/question" + randomQuestionNumber;
 
         databaseReference.child(randomQuestionPath).child("QA").addListenerForSingleValueEvent(new ValueEventListener(){
             @Override

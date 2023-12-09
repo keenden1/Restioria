@@ -15,10 +15,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 public class score_hard extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -33,7 +39,6 @@ public class score_hard extends AppCompatActivity {
         MediaPlayer mediaPlayer = media.getMediaPlayer(this);
 
         totalScoreTextView_hard = findViewById(R.id.scores_hard); // Replace with your TextView's ID
-        setFullscreen();
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -61,7 +66,7 @@ public class score_hard extends AppCompatActivity {
                         long totalScore = hardLevel1Score + hardLevel2Score + hardLevel3Score + hardLevel4Score + hardLevel5Score;
 
                         // Display the total score in the TextView
-                        totalScoreTextView_hard.setText("Total Score: " + totalScore);
+                        totalScoreTextView_hard.setText(String.valueOf(totalScore));
                     }
                 }
 
@@ -80,6 +85,7 @@ public class score_hard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveTotalScoreToAllScores();
+                highestscoreeasy();
                 Intent intent = new Intent(score_hard.this, Homepage.class);
                 startActivity(intent);
             }
@@ -95,21 +101,92 @@ public class score_hard extends AppCompatActivity {
     }
     private void saveTotalScoreToAllScores() {
         if (currentUser != null) {
-            // Create a unique ID for the new score entry
-            String newScoreId = databaseReference.push().getKey();
+            // Reference to the counter node
+            DatabaseReference counterRef = FirebaseDatabase.getInstance().getReference("counters").child("scoreCounter");
 
-            // Get the total score from the TextView
-            String totalScoreString = totalScoreTextView_hard.getText().toString();
-            long totalScore = Long.parseLong(totalScoreString.replace("Total Score: ", ""));
+            // Increment the counter and get the new value
+            counterRef.runTransaction(new Transaction.Handler() {
+                @Override
+                public Transaction.Result doTransaction(MutableData mutableData) {
+                    Long currentCount = mutableData.getValue(Long.class);
+                    if (currentCount == null) {
+                        currentCount = 1L;
+                    } else {
+                        currentCount = currentCount + 1;
+                    }
+                    mutableData.setValue(currentCount);
+                    return Transaction.success(mutableData);
+                }
 
-            // Create a map to store the score and timestamp
-            Map<String, Object> scoreData = new HashMap<>();
-            scoreData.put("score_hard", totalScore);
-            scoreData.put("timestamp", ServerValue.TIMESTAMP); // You can use ServerValue to get the server's timestamp
+                @Override
+                public void onComplete(DatabaseError databaseError, boolean committed, DataSnapshot dataSnapshot) {
+                    if (committed) {
+                        // The counter has been incremented, use the new value as your auto-incremented key
+                        Long newScoreId = dataSnapshot.getValue(Long.class);
 
-            // Save the total score to users>currentUser>allscores with the unique ID
-            databaseReference.child("allscores_hard").child(newScoreId).setValue(scoreData);
+                        // Get the total score from the TextView
+                        String totalScoreString = totalScoreTextView_hard.getText().toString();
+                        long totalScore = Long.parseLong(totalScoreString.replace("Total Score: ", ""));
+
+                        // Create a map to store the score and timestamp
+                        Map<String, Object> scoreData = new HashMap<>();
+                        scoreData.put("score_hard", totalScore);
+
+                        // Save the total score to users>currentUser>allscores with the unique ID
+                        databaseReference.child("allscores_hard").child(String.valueOf(newScoreId)).setValue(scoreData);
+                    } else {
+                        // Handle the error
+                    }
+                }
+            });
         }
+    }
+
+    private void highestscoreeasy() {
+        if (currentUser != null) {
+            DatabaseReference allScoresRef = FirebaseDatabase.getInstance().getReference()
+                    .child("users")
+                    .child(currentUser.getUid())
+                    .child("score")
+                    .child("allscores_hard");
+
+            // Use a query to get the scores in descending order and limit to the first result
+            Query query = allScoresRef.orderByChild("score_hard").limitToLast(1);
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            // Get the highest score
+                            long highestScore = snapshot.child("score_hard").getValue(Long.class);
+
+                            // Update the highest score in the user's main 'score' node
+                            DatabaseReference userScoreRef = FirebaseDatabase.getInstance().getReference()
+                                    .child("users")
+                                    .child(currentUser.getUid())
+                                    .child("score");
+
+                            userScoreRef.child("highestscore_hard").setValue(highestScore);
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Handle any errors
+                }
+            });
+        }
+    }
+
+
+    private String getCurrentDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM d, yyyy", Locale.getDefault());
+        return dateFormat.format(new Date());
+    }
+    private void updateHighestScore(long totalScore) {
+        // Update the highest score in the user's main 'score' node
+        databaseReference.child("allscores").child("highestScoreHard").setValue(totalScore);
     }
     @Override
     public void onBackPressed() {

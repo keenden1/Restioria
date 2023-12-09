@@ -53,7 +53,7 @@ public class quiz_easy extends AppCompatActivity {
         if (isTimerPaused) {
             startCountdown((int) (timeRemaining / 1000));
         } else {
-            startCountdown(15);
+            startCountdown(20);
         }
 
         back_one = findViewById(R.id.backto_easymode);
@@ -161,7 +161,7 @@ public class quiz_easy extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_easy.this, quiz_easy2.class);
                                     startActivity(intent);
                                 }
-                            }, 2000);
+                            }, 1000);
                         }else{
                             button_easy_1.setBackgroundResource(R.drawable.border4);
                             button_easy_2.setEnabled(false);
@@ -178,7 +178,7 @@ public class quiz_easy extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_easy.this, quiz_easy2.class);
                                     startActivity(intent);
                                 }
-                            }, 2000);
+                            }, 1000);
                         }
                     }
 
@@ -220,7 +220,7 @@ public class quiz_easy extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_easy.this, quiz_easy2.class);
                                     startActivity(intent);
                                 }
-                            }, 2000);
+                            }, 1000);
                         }else{
                             button_easy_2.setBackgroundResource(R.drawable.border4);
                             button_easy_1.setEnabled(false);
@@ -237,7 +237,7 @@ public class quiz_easy extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_easy.this, quiz_easy2.class);
                                     startActivity(intent);
                                 }
-                            }, 2000);
+                            }, 1000);
                         }
                     }
 
@@ -279,7 +279,7 @@ public class quiz_easy extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_easy.this, quiz_easy2.class);
                                     startActivity(intent);
                                 }
-                            }, 2000);
+                            }, 1000);
                         }else{
                             button_easy_3.setBackgroundResource(R.drawable.border4);
                             button_easy_1.setEnabled(false);
@@ -297,7 +297,7 @@ public class quiz_easy extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_easy.this, quiz_easy2.class);
                                     startActivity(intent);
                                 }
-                            }, 2000);
+                            }, 1000);
                         }
                     }
 

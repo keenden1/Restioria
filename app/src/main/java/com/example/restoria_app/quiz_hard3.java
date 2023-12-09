@@ -49,7 +49,7 @@ public class quiz_hard3 extends AppCompatActivity {
         if (isTimerPaused) {
             startCountdown((int) (timeRemaining / 1000));
         } else {
-            startCountdown(15);
+            startCountdown(10);
         }
 
         button_hard_1b= findViewById(R.id.button_hard_1b);
@@ -59,7 +59,7 @@ public class quiz_hard3 extends AppCompatActivity {
 
         int totalQuestions = 5;
         int randomQuestionNumber = (int) (Math.random() * totalQuestions) + 1;
-        String randomQuestionPath = "hard/questions/question2" + randomQuestionNumber;
+        String randomQuestionPath = "hard/questions3/question" + randomQuestionNumber;
 
 
         databaseReference.child(randomQuestionPath).child("QA").addListenerForSingleValueEvent(new ValueEventListener(){
@@ -137,7 +137,7 @@ public class quiz_hard3 extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_hard3.this, quiz_hard4.class);
                                     startActivity(intent);
                                 }
-                            }, 3000);
+                            }, 1000);
                         }else{
                             button_hard_1b.setBackgroundResource(R.drawable.border4);
                             button_hard_2b.setEnabled(false);
@@ -154,7 +154,7 @@ public class quiz_hard3 extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_hard3.this, quiz_hard4.class);
                                     startActivity(intent);
                                 }
-                            }, 3000);
+                            }, 1000);
                         }
                     }
 
@@ -196,7 +196,7 @@ public class quiz_hard3 extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_hard3.this, quiz_hard4.class);
                                     startActivity(intent);
                                 }
-                            }, 3000);
+                            }, 1000);
                         }else{
                             button_hard_2b.setBackgroundResource(R.drawable.border4);
                             button_hard_1b.setEnabled(false);
@@ -213,7 +213,7 @@ public class quiz_hard3 extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_hard3.this, quiz_hard4.class);
                                     startActivity(intent);
                                 }
-                            }, 3000);
+                            }, 1000);
                         }
                     }
 
@@ -255,7 +255,7 @@ public class quiz_hard3 extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_hard3.this, quiz_hard4.class);
                                     startActivity(intent);
                                 }
-                            }, 3000);
+                            }, 1000);
                         }else{
                             button_hard_3b.setBackgroundResource(R.drawable.border4);
                             button_hard_1b.setEnabled(false);
@@ -273,7 +273,7 @@ public class quiz_hard3 extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_hard3.this, quiz_hard4.class);
                                     startActivity(intent);
                                 }
-                            }, 3000);
+                            }, 1000);
                         }
                     }
 

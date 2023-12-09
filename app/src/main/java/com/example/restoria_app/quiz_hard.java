@@ -50,7 +50,7 @@ public class quiz_hard extends AppCompatActivity {
         if (isTimerPaused) {
             startCountdown((int) (timeRemaining / 1000));
         } else {
-            startCountdown(15);
+            startCountdown(10);
         }
 
 
@@ -140,7 +140,7 @@ public class quiz_hard extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_hard.this, quiz_hard2.class);
                                     startActivity(intent);
                                 }
-                            }, 3000);
+                            }, 1000);
                         }else{
                             button_hard_1.setBackgroundResource(R.drawable.border4);
                             button_hard_2.setEnabled(false);
@@ -157,7 +157,7 @@ public class quiz_hard extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_hard.this, quiz_hard2.class);
                                     startActivity(intent);
                                 }
-                            }, 3000);
+                            }, 1000);
                         }
                     }
 
@@ -199,7 +199,7 @@ public class quiz_hard extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_hard.this, quiz_hard2.class);
                                     startActivity(intent);
                                 }
-                            }, 3000);
+                            }, 1000);
                         }else{
                             button_hard_2.setBackgroundResource(R.drawable.border4);
                             button_hard_1.setEnabled(false);
@@ -216,7 +216,7 @@ public class quiz_hard extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_hard.this, quiz_hard2.class);
                                     startActivity(intent);
                                 }
-                            }, 3000);
+                            }, 1000);
                         }
                     }
 
@@ -258,7 +258,7 @@ public class quiz_hard extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_hard.this, quiz_hard2.class);
                                     startActivity(intent);
                                 }
-                            }, 3000);
+                            }, 1000);
                         }else{
                             button_hard_3.setBackgroundResource(R.drawable.border4);
                             button_hard_1.setEnabled(false);
@@ -276,7 +276,7 @@ public class quiz_hard extends AppCompatActivity {
                                     Intent intent = new Intent(quiz_hard.this, quiz_hard2.class);
                                     startActivity(intent);
                                 }
-                            }, 3000);
+                            }, 1000);
                         }
                     }
 

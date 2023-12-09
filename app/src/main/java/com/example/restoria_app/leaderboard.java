@@ -1,5 +1,6 @@
 package com.example.restoria_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -22,6 +23,7 @@ public class leaderboard extends AppCompatActivity {
     private MediaPlayer mediaPlayer;
     ImageView leaderboard_back;
     private FirebaseAuth mAuth;
+    TextView easy_scoring,medium_scoring,hard_scoring,Total_Scores;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://restoria-e00ae-default-rtdb.asia-southeast1.firebasedatabase.app/");
 
     @Override
@@ -32,7 +34,12 @@ public class leaderboard extends AppCompatActivity {
         MediaPlayer mediaPlayer = media.getMediaPlayer(this);
         setContentView(R.layout.activity_leaderboard);
 
-
+        easy_scoring = findViewById(R.id.easy_scoring);
+        medium_scoring = findViewById(R.id.medium_scoring);
+        hard_scoring = findViewById(R.id.hard_scoring);
+        Total_Scores= findViewById(R.id.Total_Scores);
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         leaderboard_back = findViewById(R.id.back_to_start);
         leaderboard_back.setOnClickListener(new View.OnClickListener() {
@@ -44,46 +51,93 @@ public class leaderboard extends AppCompatActivity {
         });
 
 
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+            if (currentUser != null) {
+                DatabaseReference userScoreRef = FirebaseDatabase.getInstance().getReference()
+                        .child("users")
+                        .child(currentUser.getUid())
+                        .child("score");
 
-        // Assuming you have a TextView instance for easy scoring
-        TextView easyScoringTextView = findViewById(R.id.easy_scoring);
+                userScoreRef.child("highestscore_easy").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            // Get the value of highestscore_easy
+                            long highestScore = dataSnapshot.getValue(Long.class);
 
-        // Check if the user is logged in before accessing their data
-        if (currentUser != null) {
-            DatabaseReference currentUserRef = databaseReference.child("users").child(currentUser.getUid());
-
-            // Attach a listener to retrieve the highest score
-            currentUserRef.child("score").child("allscores").child("highestScore").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    // Get the highest score value from the dataSnapshot
-                    Long highestScore = dataSnapshot.getValue(Long.class);
-
-                    if (highestScore != null) {
-                        // Update the TextView with the highest score
-                        easyScoringTextView.setText("EASY MODE SCORE: " + highestScore);
-                    } else {
-                        // Handle the case when the highest score is null
-                        easyScoringTextView.setText("EASY MODE SCORE: N/A");
+                            // Set the value to the TextView
+                            easy_scoring.setText("Score EASY: " + String.valueOf(highestScore));
+                        }
                     }
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Handle any errors
+                    }
+                });
+
+                userScoreRef.child("highestscore_medium").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            // Get the value of highestscore_medium
+                            long highestScoreMedium = dataSnapshot.getValue(Long.class);
+
+                            // Set the value to the TextView
+                            medium_scoring.setText("Score MEDIUM: " + String.valueOf(highestScoreMedium));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Handle any errors
+                    }
+                });
+
+                userScoreRef.child("highestscore_hard").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            // Get the value of highestscore_medium
+                            long highestScoreMedium = dataSnapshot.getValue(Long.class);
+
+                            // Set the value to the TextView
+                            hard_scoring.setText("Score HARD: " + String.valueOf(highestScoreMedium));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Handle any errors
+                    }
+                });
+
+                if (currentUser != null) {
+                    DatabaseReference userMAX = FirebaseDatabase.getInstance().getReference()
+                            .child("users")
+                            .child(currentUser.getUid())
+                            .child("score");
+                    userMAX.child("max_score").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                // Get the value of highestscore_easy
+                                long maxScore = dataSnapshot.getValue(Long.class);
+
+                                // Set the value to the TextView
+                                Total_Scores.setText("IN GAME SCORE: " + String.valueOf(maxScore));
+                            }
+                        }
+
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Handle any errors
+                        }
+                    });
+
                 }
-
-                @Override
-                public void onCancelled(DatabaseError error) {
-                    // Handle database error
-                }
-            });
-        }
-
-
-
-
-
-
-
-
+            }
     }
 
     @Override
